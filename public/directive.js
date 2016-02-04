@@ -2,7 +2,7 @@
 
     'use strict';
     window.angular.module('check', [])
-        .directive('checkDirective', function($interval, $http){
+        .directive('checkDirective', function($interval, $http) {
             // we use this directive to check the health of our web site
             // the url will be /health, and this value can be configed
             // we only keep the last number of msg, e.g., we can only keep 5
@@ -13,31 +13,29 @@
                     interval: '@',
                     number: '@'
                 },
-                link: function(scope, element, attrs){
-                    console.log('interval', scope.interval);
-                    scope.interval = 10;
-                    console.log('interval', scope.interval);
-                    scope.number = parseInt(scope.number) || 5;
-                    scope.url = scope.url || '/check';
+                link: function(scope, element, attrs) {
+                    scope.opts = {
+                        interval: parseInt(scope.interval || 10),
+                        number: parseInt(scope.number || 5),
+                        url: scope.url || '/check'
+                    };
                     scope.msgs = [];
 
-                    var updateMsg = function(status){
-                        return function(){
+                    var updateMsg = function(status) {
+                        return function() {
+                            console.log('update msg', status);
                             // TODO, we didn't verify the number
                             // this point can trigger a fail in our test.
                             scope.msgs.push({
                                 status: status ? 'OK' : 'Not Found'
-                            })
+                            });
                         };
-                    }
-                    $interval(function(){
-                        console.log('req');
-                        $http.get(scope.url).success(function(){
-                            console.log('resp');
-                            return updateMsg(1)
-                        }).error(updateMsg(0));
-                    }, scope.interval);
+                    };
+                    $interval(function() {
+                        console.log('interval', scope.opts.interval);
+                        $http.get(scope.opts.url).success(updateMsg(1)).error(updateMsg(0));
+                    }, scope.opts.interval);
                 }
-            };   
+            };
         });
 })(this);

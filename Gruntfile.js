@@ -12,9 +12,13 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+        jshint: {
+            files: ['Gruntfile.js', 'public/*.js', 'spec/*.js']
         }
     });
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.registerTask('default', ['jasmine']);
-}
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('default', ['jshint', 'jasmine']);
+};
 

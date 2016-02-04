@@ -52,7 +52,4 @@ describe('verify check directive', function() {
         expect(scope.msgs.length).toEqual(5);
     });
 
-    it('should fail', function(){
-        expect(true).toBe(false);
-    });
 });

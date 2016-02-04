@@ -41,4 +41,14 @@ describe('verify check directive', function() {
         $httpBackend.flush();
         expect(scope.msgs.length).toEqual(1);
     });
+
+    it('check interval and http', function() {
+        var element = $compile('<check-directive></check-directive>')($rootScope);
+        scope = element.isolateScope();
+
+        // add interval check
+        $interval.flush(60);
+        $httpBackend.flush();
+        expect(scope.msgs.length).toEqual(5);
+    });
 });

@@ -23,9 +23,11 @@
 
                     var updateMsg = function(status) {
                         return function() {
-                            console.log('update msg', status);
                             // TODO, we didn't verify the number
                             // this point can trigger a fail in our test.
+                            if (scope.msgs.length >= 5){
+                                scope.msgs.shift();
+                            }
                             scope.msgs.push({
                                 status: status ? 'OK' : 'Not Found'
                             });

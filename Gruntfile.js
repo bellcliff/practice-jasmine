@@ -9,7 +9,8 @@ module.exports = function(grunt) {
                     vendor: [
                         'public/libs/angular/angular.js',
                         'public/libs/angular-mocks/angular-mocks.js'
-                    ]
+                    ],
+                    junit: {path: 'report'}
                 }
             }
         },

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+var tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+
+function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+}
+
+function safe_tags_replace(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+}
+
+var xhttp = new XMLHttpRequest
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4) {
+        document.body.innerHTML += '<pre>' + safe_tags_replace(xhttp.responseText) + '</pre>'
+    }
+}
+xhttp.open('GET', 'a.html')
+xhttp.send()
+</script>
+</body>
+</html>

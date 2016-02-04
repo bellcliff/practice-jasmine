@@ -51,4 +51,8 @@ describe('verify check directive', function() {
         $httpBackend.flush();
         expect(scope.msgs.length).toEqual(5);
     });
+
+    it('should fail', function(){
+        expect(true).toBe(false);
+    });
 });

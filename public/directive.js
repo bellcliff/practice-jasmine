@@ -34,7 +34,7 @@
                         };
                     };
                     $interval(function() {
-                        console.log('interval', scope.opts.interval);
+                        // console.log('interval', scope.opts.interval);
                         $http.get(scope.opts.url).success(updateMsg(1)).error(updateMsg(0));
                     }, scope.opts.interval);
                 }
